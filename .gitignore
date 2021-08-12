@@ -1,3 +1,4 @@
 # weights should be downloaded, just provide one file for quickstart
 weights/*
+!weights/README.md
 !weights/LS15-20x256SE-jj-9-75000000.pb.gz
