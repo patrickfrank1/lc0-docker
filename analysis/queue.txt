@@ -1,0 +1,11 @@
+# This file lets you queue chess positions for analysis. Each line should contain
+# exactly one position. The line should contain the position in FEN notation
+# (https://de.wikipedia.org/wiki/Forsyth-Edwards-Notation) and a termination criterion
+# for the analysis delimited by semicolon. Supported termination criteria are 'depth'.
+# 'time' or 'nodes'. Optionally, the number of output variations can also be specified
+# with keyword multipv (one otherwise). Examples:
+# rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1; time 60
+# r5r1/4pk2/p2P1n1Q/2p1pp2/1pP5/5P2/qP1N4/2KR2R1 w - - 3 28; depth 10; multipv 3
+# r4r2/4ppkp/p5p1/qppPp3/P1P1P1nP/2N5/1P1Q1P2/R3K2R w KQ - 0 18; nodes 100000; multipv 10
+#
+# Lines starting with # are comments and will be ignored.

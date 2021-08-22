@@ -1,7 +1,7 @@
 FROM ubuntu:focal as builder
 
 RUN apt-get update &&\
-    apt-get install -y curl wget supervisor git \
+    apt-get install -y curl wget unzip supervisor git \
     libopenblas-base libprotobuf17 zlib1g-dev \
     ocl-icd-libopencl1 \
     clang-6.0 libopenblas-dev ninja-build protobuf-compiler libprotobuf-dev \
@@ -9,11 +9,11 @@ RUN apt-get update &&\
     apt-get clean all
 RUN pip3 install meson
 
-LABEL "version"="0.27.0"
+ENV LC0_VERSION="0.27.0"
 
-RUN curl -s -L https://github.com/LeelaChessZero/lc0/archive/refs/tags/v0.27.0.tar.gz > v0.27.0.tar.gz && \
-    tar xfz v0.27.0.tar.gz && \
-    rm v0.27.0.tar.gz && \
+RUN curl -s -L https://github.com/LeelaChessZero/lc0/archive/refs/tags/v"$LC0_VERSION".tar.gz > v"$LC0_VERSION".tar.gz && \
+    tar xfz v"$LC0_VERSION".tar.gz && \
+    rm v"$LC0_VERSION".tar.gz && \
     mv lc0* /lc0
 WORKDIR /lc0
 RUN CC=clang-6.0 CXX=clang++-6.0 INSTALL_PREFIX=/lc0 \
@@ -23,11 +23,14 @@ WORKDIR /lc0/bin
 FROM ubuntu:focal as lc0
 RUN apt-get update &&\
     apt-get install -y libopenblas-base libprotobuf17 zlib1g-dev \
-    ocl-icd-libopencl1
+    ocl-icd-libopencl1 python3-pip
+RUN pip3 install python-chess
 COPY --from=builder /lc0/bin /lc0/bin
 ENV PATH=/lc0/bin:$PATH
 
-USER daemon
+RUN mkdir /home/daemon
+RUN mkdir /home/daemon/analysis
 WORKDIR /home/daemon
+COPY ./src/position_analysis.py .
 
-CMD ["lc0", "--config=/lc0/settings/lc0.config"]
+ENTRYPOINT ["python3", "position_analysis.py"]
