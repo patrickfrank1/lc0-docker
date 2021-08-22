@@ -2,3 +2,12 @@
 weights/*
 !weights/README.md
 !weights/LS15-20x256SE-jj-9-75000000.pb.gz
+
+# don't save logs
+settings/*
+!settings/lc0.config
+!settings/README.md
+
+# don't save analyses, just template for queue
+analysis/*
+!analysis/queue.txt
