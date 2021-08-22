@@ -1,9 +1,11 @@
 #!/bin/bash
 
 BASE_DIR=$(pwd)
-CONTAINER_NAME="sf_lc0_base"
+CONTAINER_NAME="lc0_sf_base"
 
-docker container rm -f "$CONTAINER_NAME"
+if [ "$(docker ps -a | grep $CONTAINER_NAME)" ]; then
+  docker container rm -f "$CONTAINER_NAME"
+fi
 
 docker container run \
     -it \
