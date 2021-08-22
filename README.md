@@ -85,7 +85,7 @@ now navigate to `./analysis/queue.txt` in your workspace and follow the instruct
 
 ![image](https://user-images.githubusercontent.com/25801668/130369628-1af28025-fbcd-4cbf-bb97-ed000ea2f261.png)
 
-resluts in the following output file (truncated)
+results in the following output file (truncated)
 
 ![image](https://user-images.githubusercontent.com/25801668/130369674-54c51bd8-fd3f-4b03-84a2-9b8c4415ea8c.png)
 
